@@ -1,0 +1,47 @@
+{
+  "name": "rollup-mvdev",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "cd node_modules/canvas && node-gyp rebuild",
+    "build": "rm -rf dist && rollup -c",
+    "build-deep": "node --max-old-space-size=4096 ./node_modules/rollup/bin/rollup -c ./rollup.test.config.js",
+    "watch": "rollup -cw",
+    "test": "jest",
+    "doc": "typedoc"
+  },
+  "author": "Lecode <lecodeworksgame@gmail.com>",
+  "repository": {
+    "type": "github",
+    "url": ""
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.10.5",
+    "canvas": "^2.4.1",
+    "canvas-prebuilt": "^2.0.0-alpha.14",
+    "jest": "^24.7.1",
+    "jsdom-global-fork": "^3.0.2-gamma",
+    "mv-lib": "^1.0.1",
+    "node-notifier": "^5.4.0",
+    "pixi.js": "^4.8.7",
+    "rollup": "^1.1.2",
+    "rollup-plugin-commonjs": "^9.3.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-license": "^0.8.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "rollup-plugin-uglify": "^6.0.2",
+    "ts-jest": "^24.0.0",
+    "tslib": "^1.9.3",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-external-module-name": "^2.0.0",
+    "typescript": "^3.4.2"
+  },
+  "dependencies": {
+    "@urd/core": "/media/cyriac/0CC5166B0CC5166B/Work/@urd/core/",
+    "node-gyp": "^3.8.0"
+  }
+}
