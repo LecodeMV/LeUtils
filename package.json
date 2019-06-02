@@ -1,14 +1,18 @@
 {
-  "name": "rollup-mvdev",
+  "name": "leutils",
   "version": "1.0.0",
   "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "cd node_modules/canvas && node-gyp rebuild",
     "build": "rm -rf dist && rollup -c",
     "build-deep": "node --max-old-space-size=4096 ./node_modules/rollup/bin/rollup -c ./rollup.test.config.js",
     "watch": "rollup -cw",
     "test": "jest",
-    "doc": "typedoc"
+    "doc": "typedoc",
+    "e2e": "rollup -c rollup.config.test.js",
+    "urd": "HELPER=\"$PWD/node_modules/@urd/core/cli.sh\" && cd \"$(echo $INIT_CWD)\" && \"$HELPER\""
   },
   "author": "Lecode <lecodeworksgame@gmail.com>",
   "repository": {
@@ -23,7 +27,6 @@
     "canvas-prebuilt": "^2.0.0-alpha.14",
     "jest": "^24.7.1",
     "jsdom-global-fork": "^3.0.2-gamma",
-    "mv-lib": "^1.0.1",
     "node-notifier": "^5.4.0",
     "pixi.js": "^4.8.7",
     "rollup": "^1.1.2",
@@ -38,10 +41,11 @@
     "tslib": "^1.9.3",
     "typedoc": "^0.14.2",
     "typedoc-plugin-external-module-name": "^2.0.0",
-    "typescript": "^3.4.2"
+    "typescript": "^3.4.2",
+    "node-gyp": "^3.8.0"
   },
   "dependencies": {
     "@urd/core": "/media/cyriac/0CC5166B0CC5166B/Work/@urd/core/",
-    "node-gyp": "^3.8.0"
+    "mv-lib": "^1.0.1"
   }
 }

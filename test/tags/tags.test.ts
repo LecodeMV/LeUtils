@@ -3,6 +3,25 @@ import { tags } from '../../src/Core/TagsManaging';
 import { TestItem } from './test.urd-item';
 import { actor, states, dataActor } from '../dummy';
 
+/*
+let tags = tags(...);
+tags.my_tag.get() || tags.my_tag.collect() || tags.my_tag.watch() || tags.my_tag.unwatch()
+tags.my_tag.next().nbr.get()
+*/
+
+/*
+let tags = tags(...);
+tags.get('my_tag.nbr', [ {}, {}])
+tags.collect('my_tag.nbr', [ {}, {}])
+let obs = tags.observable('my_tag.nbr');
+obs.onGetContext((path) => context);
+obs.onChange((tagRes, before, after) => {});
+obs.dispose();
+
+let obsBulk = tags.observeAny([obs], (tagRes, before, after) => {});
+obsBulk.dispose();
+*/
+
 dataActor.note = `
   <my_tag>
   <!nbr>
@@ -30,7 +49,7 @@ states.push({
 
 let tag = tags<TestItem>(actor, testModel);
 
-let getter = tag.get();
+let getter = tag.getter();
 let collector = tag.collect();
 let watcher = tag.watch();
 

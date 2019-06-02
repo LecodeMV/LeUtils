@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TagResult | rollup-mvdev</title>
+	<title>TagResult | leutils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">rollup-mvdev</a>
+					<a href="../index.html" class="title">leutils</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -60,7 +60,7 @@
 					<a href="tagsmanaging.tagresult.html">TagResult</a>
 				</li>
 			</ul>
-			<h1>Class TagResult&lt;T&gt;</h1>
+			<h1>Class TagResult&lt;T, TProp&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,6 +72,9 @@
 				<ul class="tsd-type-parameters">
 					<li>
 						<h4>T</h4>
+					</li>
+					<li>
+						<h4>TProp</h4>
 					</li>
 				</ul>
 			</section>
@@ -97,34 +100,39 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#battler" class="tsd-kind-icon">battler</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#cachedresults" class="tsd-kind-icon">cached<wbr>Results</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#observables" class="tsd-kind-icon">observables</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#patterns" class="tsd-kind-icon">patterns</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#repository" class="tsd-kind-icon">repository</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#rpgobject" class="tsd-kind-icon">rpg<wbr>Object</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#watcherhandlers" class="tsd-kind-icon">watcher<wbr>Handlers</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_adaptmodel" class="tsd-kind-icon">_adapt<wbr>Model</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_collectfrompath" class="tsd-kind-icon">_collect<wbr>From<wbr>Path</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_getallvalues" class="tsd-kind-icon">_get<wbr>All<wbr>Values</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_getdefaultvalue" class="tsd-kind-icon">_get<wbr>Default<wbr>Value</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_getinventory" class="tsd-kind-icon">_get<wbr>Inventory</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_getfrompath" class="tsd-kind-icon">_get<wbr>From<wbr>Path</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_getmainvalue" class="tsd-kind-icon">_get<wbr>Main<wbr>Value</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_makecollectproxy" class="tsd-kind-icon">_make<wbr>Collect<wbr>Proxy</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_makegetproxy" class="tsd-kind-icon">_make<wbr>Get<wbr>Proxy</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_makestructuredefaultvalue" class="tsd-kind-icon">_make<wbr>Structure<wbr>Default<wbr>Value</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_makewatcherproxy" class="tsd-kind-icon">_make<wbr>Watcher<wbr>Proxy</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#checkwatchers" class="tsd-kind-icon">check<wbr>Watchers</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#collect" class="tsd-kind-icon">collect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#_rawfrompath" class="tsd-kind-icon">_raw<wbr>From<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#checkobservables" class="tsd-kind-icon">check<wbr>Observables</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="tagsmanaging.tagresult.html#collect" class="tsd-kind-icon">collect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#collector" class="tsd-kind-icon">collector</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#exists" class="tsd-kind-icon">exists</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#getfrompath" class="tsd-kind-icon">get<wbr>From<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="tagsmanaging.tagresult.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#getinventory" class="tsd-kind-icon">get<wbr>Inventory</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#getter" class="tsd-kind-icon">getter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="tagsmanaging.tagresult.html#observable" class="tsd-kind-icon">observable</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="tagsmanaging.tagresult.html#observeall" class="tsd-kind-icon">observe<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="tagsmanaging.tagresult.html#observeany" class="tsd-kind-icon">observe<wbr>Any</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#raw" class="tsd-kind-icon">raw</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#rawfrompath" class="tsd-kind-icon">raw<wbr>From<wbr>Path</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="tagsmanaging.tagresult.html#registerwatcher" class="tsd-kind-icon">register<wbr>Watcher</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#watch" class="tsd-kind-icon">watch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.tagresult.html#removeobservable" class="tsd-kind-icon">remove<wbr>Observable</a></li>
 							</ul>
 						</section>
 					</div>
@@ -142,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:257</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L440">Core/TagsManaging.ts:440</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -173,9 +181,27 @@
 					<div class="tsd-signature tsd-kind-icon">battler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Game_Battler</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:254</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L436">Core/TagsManaging.ts:436</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="cachedresults" class="tsd-anchor"></a>
+					<h3>cached<wbr>Results</h3>
+					<div class="tsd-signature tsd-kind-icon">cached<wbr>Results<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L439">Core/TagsManaging.ts:439</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="tagsmanaging.cachedtagresult.html" class="tsd-signature-type">CachedTagResult</a></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="model" class="tsd-anchor"></a>
@@ -183,9 +209,27 @@
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Model</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:255</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L437">Core/TagsManaging.ts:437</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="observables" class="tsd-anchor"></a>
+					<h3>observables</h3>
+					<div class="tsd-signature tsd-kind-icon">observables<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L440">Core/TagsManaging.ts:440</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="patterns" class="tsd-anchor"></a>
@@ -193,7 +237,7 @@
 					<div class="tsd-signature tsd-kind-icon">patterns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ModelPattern</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:256</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L438">Core/TagsManaging.ts:438</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +247,7 @@
 					<div class="tsd-signature tsd-kind-icon">repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">UrdRepository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:252</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L434">Core/TagsManaging.ts:434</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -213,27 +257,9 @@
 					<div class="tsd-signature tsd-kind-icon">rpg<wbr>Object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RPGObject</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:253</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L435">Core/TagsManaging.ts:435</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="watcherhandlers" class="tsd-anchor"></a>
-					<h3>watcher<wbr>Handlers</h3>
-					<div class="tsd-signature tsd-kind-icon">watcher<wbr>Handlers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in Core/TagsManaging.ts:257</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="tagsmanaging.watcherhandler.html" class="tsd-signature-type">WatcherHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-							</li>
-						</ul>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -248,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:273</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L456">Core/TagsManaging.ts:456</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -262,6 +288,32 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="_collectfrompath" class="tsd-anchor"></a>
+					<h3>_collect<wbr>From<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">_collect<wbr>From<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, optionArray<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L809">Core/TagsManaging.ts:809</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>optionArray: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="_getallvalues" class="tsd-anchor"></a>
 					<h3>_get<wbr>All<wbr>Values</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -271,7 +323,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:587</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L845">Core/TagsManaging.ts:845</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -303,7 +355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:625</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L883">Core/TagsManaging.ts:883</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -317,19 +369,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="_getinventory" class="tsd-anchor"></a>
-					<h3>_get<wbr>Inventory</h3>
+					<a name="_getfrompath" class="tsd-anchor"></a>
+					<h3>_get<wbr>From<wbr>Path</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_get<wbr>Inventory<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">_get<wbr>From<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, optionArray<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:606</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L797">Core/TagsManaging.ts:797</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>optionArray: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -343,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:563</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L821">Core/TagsManaging.ts:821</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -378,7 +439,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:440</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L650">Core/TagsManaging.ts:650</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -398,13 +459,13 @@
 					<a name="_makegetproxy" class="tsd-anchor"></a>
 					<h3>_make<wbr>Get<wbr>Proxy</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_make<wbr>Get<wbr>Proxy<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">_make<wbr>Get<wbr>Proxy<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, optionArray<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:298</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L490">Core/TagsManaging.ts:490</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -414,6 +475,9 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> path: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> optionArray: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -430,7 +494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:617</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L875">Core/TagsManaging.ts:875</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -446,62 +510,94 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="_makewatcherproxy" class="tsd-anchor"></a>
-					<h3>_make<wbr>Watcher<wbr>Proxy</h3>
+					<a name="_rawfrompath" class="tsd-anchor"></a>
+					<h3>_raw<wbr>From<wbr>Path</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_make<wbr>Watcher<wbr>Proxy<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, contexts<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">_raw<wbr>From<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:489</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L786">Core/TagsManaging.ts:786</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>item: <span class="tsd-signature-type">Object</span></h5>
+									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> path: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> contexts: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+									<h5>options: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="checkwatchers" class="tsd-anchor"></a>
-					<h3>check<wbr>Watchers</h3>
+					<a name="checkobservables" class="tsd-anchor"></a>
+					<h3>check<wbr>Observables</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">check<wbr>Watchers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">check<wbr>Observables<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:534</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L724">Core/TagsManaging.ts:724</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a name="collect" class="tsd-anchor"></a>
 					<h3>collect</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">collect<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CollectableWrapper</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Chainable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">collect&lt;I, K&gt;<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, <span class="tsd-signature-symbol">...</span>contextArr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">I[K]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:435</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L641">Core/TagsManaging.ts:641</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>I<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProp</span></h4>
+								</li>
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProp</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contextArr: <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">I[K]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="collector" class="tsd-anchor"></a>
+					<h3>collector</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">collector<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CollectableWrapper</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Chainable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L636">Core/TagsManaging.ts:636</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -524,7 +620,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:289</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L472">Core/TagsManaging.ts:472</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -537,17 +633,69 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Chainable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get&lt;I, K&gt;<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, <span class="tsd-signature-symbol">...</span>contextArr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">I[K]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:293</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L481">Core/TagsManaging.ts:481</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>I<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProp</span></h4>
+								</li>
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProp</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contextArr: <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">I[K]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getinventory" class="tsd-anchor"></a>
+					<h3>get<wbr>Inventory</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Inventory<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RPGObject</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L864">Core/TagsManaging.ts:864</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RPGObject</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getter" class="tsd-anchor"></a>
+					<h3>getter</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">getter<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Chainable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L476">Core/TagsManaging.ts:476</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -560,29 +708,108 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getfrompath" class="tsd-anchor"></a>
-					<h3>get<wbr>From<wbr>Path</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>From<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, optionArray<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="observable" class="tsd-anchor"></a>
+					<h3>observable</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">observable&lt;I, K&gt;<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, iniValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">UnPromisify</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">I[K]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:551</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L694">Core/TagsManaging.ts:694</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>I<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProp</span></h4>
+								</li>
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProp</span></h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>path: <span class="tsd-signature-type">K</span></h5>
 								</li>
 								<li>
-									<h5>optionArray: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> iniValue: <span class="tsd-signature-type">UnPromisify</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">I[K]</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="observeall" class="tsd-anchor"></a>
+					<h3>observe<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">observe<wbr>All&lt;K, KProp&gt;<span class="tsd-signature-symbol">(</span>obsArr<span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span>, watcher<span class="tsd-signature-symbol">: </span><a href="../modules/tagsmanaging.html#lesserwatcher" class="tsd-signature-type">LesserWatcher</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagsbulkobservable.html" class="tsd-signature-type">TagsBulkObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L710">Core/TagsManaging.ts:710</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K</h4>
+								</li>
+								<li>
+									<h4>KProp</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obsArr: <a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>watcher: <a href="../modules/tagsmanaging.html#lesserwatcher" class="tsd-signature-type">LesserWatcher</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="tagsmanaging.tagsbulkobservable.html" class="tsd-signature-type">TagsBulkObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="observeany" class="tsd-anchor"></a>
+					<h3>observe<wbr>Any</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">observe<wbr>Any&lt;K, KProp&gt;<span class="tsd-signature-symbol">(</span>obsArr<span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span>, watcher<span class="tsd-signature-symbol">: </span><a href="../modules/tagsmanaging.html#lesserwatcher" class="tsd-signature-type">LesserWatcher</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagsbulkobservable.html" class="tsd-signature-type">TagsBulkObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L700">Core/TagsManaging.ts:700</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K</h4>
+								</li>
+								<li>
+									<h4>KProp</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obsArr: <a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>watcher: <a href="../modules/tagsmanaging.html#lesserwatcher" class="tsd-signature-type">LesserWatcher</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="tagsmanaging.tagsbulkobservable.html" class="tsd-signature-type">TagsBulkObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">KProp</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -596,7 +823,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:480</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L690">Core/TagsManaging.ts:690</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -610,83 +837,25 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="rawfrompath" class="tsd-anchor"></a>
-					<h3>raw<wbr>From<wbr>Path</h3>
+					<a name="removeobservable" class="tsd-anchor"></a>
+					<h3>remove<wbr>Observable</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">raw<wbr>From<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Observable<span class="tsd-signature-symbol">(</span>obs<span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:540</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L720">Core/TagsManaging.ts:720</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-								<li>
-									<h5>options: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="registerwatcher" class="tsd-anchor"></a>
-					<h3>register<wbr>Watcher</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">register<wbr>Watcher&lt;T&gt;<span class="tsd-signature-symbol">(</span>watcher<span class="tsd-signature-symbol">: </span><a href="../modules/tagsmanaging.html#watcher" class="tsd-signature-type">Watcher</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, contexts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in Core/TagsManaging.ts:526</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>watcher: <a href="../modules/tagsmanaging.html#watcher" class="tsd-signature-type">Watcher</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5>path: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>contexts: <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>obs: <a href="tagsmanaging.tagobservable.html" class="tsd-signature-type">TagObservable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="watch" class="tsd-anchor"></a>
-					<h3>watch</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">watch<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/tagsmanaging.html#watchable" class="tsd-signature-type">Watchable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Chainable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in Core/TagsManaging.ts:484</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/tagsmanaging.html#watchable" class="tsd-signature-type">Watchable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Chainable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -771,6 +940,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="tagsmanaging.cachedtagresult.html" class="tsd-kind-icon">Cached<wbr>Tag<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="tagsmanaging.tagobservable.html" class="tsd-kind-icon">Tag<wbr>Observable</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
@@ -783,7 +958,13 @@
 								<a href="tagsmanaging.tagresult.html#battler" class="tsd-kind-icon">battler</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="tagsmanaging.tagresult.html#cachedresults" class="tsd-kind-icon">cached<wbr>Results</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#model" class="tsd-kind-icon">model</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="tagsmanaging.tagresult.html#observables" class="tsd-kind-icon">observables</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#patterns" class="tsd-kind-icon">patterns</a>
@@ -794,11 +975,11 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#rpgobject" class="tsd-kind-icon">rpg<wbr>Object</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#watcherhandlers" class="tsd-kind-icon">watcher<wbr>Handlers</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#_adaptmodel" class="tsd-kind-icon">_adapt<wbr>Model</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="tagsmanaging.tagresult.html#_collectfrompath" class="tsd-kind-icon">_collect<wbr>From<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#_getallvalues" class="tsd-kind-icon">_get<wbr>All<wbr>Values</a>
@@ -807,7 +988,7 @@
 								<a href="tagsmanaging.tagresult.html#_getdefaultvalue" class="tsd-kind-icon">_get<wbr>Default<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#_getinventory" class="tsd-kind-icon">_get<wbr>Inventory</a>
+								<a href="tagsmanaging.tagresult.html#_getfrompath" class="tsd-kind-icon">_get<wbr>From<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#_getmainvalue" class="tsd-kind-icon">_get<wbr>Main<wbr>Value</a>
@@ -822,41 +1003,53 @@
 								<a href="tagsmanaging.tagresult.html#_makestructuredefaultvalue" class="tsd-kind-icon">_make<wbr>Structure<wbr>Default<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#_makewatcherproxy" class="tsd-kind-icon">_make<wbr>Watcher<wbr>Proxy</a>
+								<a href="tagsmanaging.tagresult.html#_rawfrompath" class="tsd-kind-icon">_raw<wbr>From<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#checkwatchers" class="tsd-kind-icon">check<wbr>Watchers</a>
+								<a href="tagsmanaging.tagresult.html#checkobservables" class="tsd-kind-icon">check<wbr>Observables</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="tagsmanaging.tagresult.html#collect" class="tsd-kind-icon">collect</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="tagsmanaging.tagresult.html#collector" class="tsd-kind-icon">collector</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#exists" class="tsd-kind-icon">exists</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="tagsmanaging.tagresult.html#get" class="tsd-kind-icon">get</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#getfrompath" class="tsd-kind-icon">get<wbr>From<wbr>Path</a>
+								<a href="tagsmanaging.tagresult.html#getinventory" class="tsd-kind-icon">get<wbr>Inventory</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="tagsmanaging.tagresult.html#getter" class="tsd-kind-icon">getter</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="tagsmanaging.tagresult.html#observable" class="tsd-kind-icon">observable</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="tagsmanaging.tagresult.html#observeall" class="tsd-kind-icon">observe<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="tagsmanaging.tagresult.html#observeany" class="tsd-kind-icon">observe<wbr>Any</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="tagsmanaging.tagresult.html#raw" class="tsd-kind-icon">raw</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#rawfrompath" class="tsd-kind-icon">raw<wbr>From<wbr>Path</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="tagsmanaging.tagresult.html#registerwatcher" class="tsd-kind-icon">register<wbr>Watcher</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tagsmanaging.tagresult.html#watch" class="tsd-kind-icon">watch</a>
+								<a href="tagsmanaging.tagresult.html#removeobservable" class="tsd-kind-icon">remove<wbr>Observable</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="tagsmanaging.watcherhandler.html" class="tsd-kind-icon">Watcher<wbr>Handler</a>
+						<a href="tagsmanaging.tagsbulkobservable.html" class="tsd-kind-icon">Tags<wbr>Bulk<wbr>Observable</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/tagsmanaging.html#lesserwatcher" class="tsd-kind-icon">Lesser<wbr>Watcher</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../modules/tagsmanaging.html#watchable" class="tsd-kind-icon">Watchable</a>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TagsManaging | rollup-mvdev</title>
+	<title>TagsManaging | leutils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">rollup-mvdev</a>
+					<a href="../index.html" class="title">leutils</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -69,7 +69,7 @@
 					<div class="lead">
 						<h2 id="a-complex-and-complete-module-to-parse-and-evaluate-notetags-of-rpg-maker-mv-data-objects-">A complex and complete module to parse and evaluate notetags of RPG Maker MV data objects.</h2>
 					</div>
-					<p>Given the following notetags:
+					<p>Let&#39;s say we have the following notetags:
 					<em>Actor</em></p>
 					<pre><code><span class="hljs-params">&lt;my_tag&gt;</span>
 <span class="hljs-symbol">gold_gain_per_step:</span> <span class="hljs-number">10</span>
@@ -82,7 +82,7 @@ I am a simple adventurer.
 <span class="hljs-params">&lt;/bio&gt;</span>
 <span class="hljs-params">&lt;/my_tag&gt;</span>
 <span class="hljs-symbol">
-title:</span> Hero</code></pre><p><em>Armor equiped by actor</em></p>
+title:</span> Hero</code></pre><p><em>Armor equipped by actor</em></p>
 					<pre><code><span class="hljs-params">&lt;my_tag&gt;</span>
 storage_size+: <span class="hljs-number">20</span>
 <span class="hljs-symbol">gold_gain_per_step:</span> <span class="hljs-number">500</span>
@@ -94,80 +94,179 @@ storage_size+: <span class="hljs-number">20</span>
 					When parsing and interpreting the values of these notetags, this module follow the following rules:</p>
 					<ul>
 						<li>Base values are overwritten according to this priority list: State &gt; Equipment &gt; Class &gt; Battler.</li>
-						<li><code>+</code> is used to add raw values and <code>%</code> to modify the final value by a percentage.</li>
+						<li><code>+</code> suffix to a notetag is used to add raw values and <code>%</code> to modify the final value by a percentage.</li>
 					</ul>
+					<h3 id="supporting-typescript">Supporting TypeScript</h3>
+					<p>The first thing to do before exploiting this module, is to define a Urd Model for your
+					notetags.</p>
+					<p><strong>myModel.urd-model.ts</strong></p>
+					<pre><code class="language-js"><span class="hljs-keyword">import</span> { Model } <span class="hljs-keyword">from</span> <span class="hljs-string">'@urd/core'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> myModel: Model = {
+ <span class="hljs-attr">title</span>: {
+   <span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span>
+ },
+ <span class="hljs-attr">my_tag</span>: {
+   <span class="hljs-attr">type</span>: <span class="hljs-string">'structure'</span>,
+   <span class="hljs-attr">fields</span>: {
+     <span class="hljs-attr">gold_gain_per_step</span>: {
+       <span class="hljs-attr">type</span>: <span class="hljs-string">'number'</span>,
+     },
+     <span class="hljs-attr">storage_size</span>: {
+       <span class="hljs-attr">type</span>: <span class="hljs-string">'number'</span>
+     },
+     <span class="hljs-attr">pet_name</span>: {
+       <span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span>
+     },
+     <span class="hljs-attr">passive</span>: {
+       <span class="hljs-attr">type</span>: <span class="hljs-string">'list'</span>
+     },
+     <span class="hljs-attr">bio</span>: {
+       <span class="hljs-attr">type</span>: <span class="hljs-string">'text'</span>
+     }
+   }
+ }
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> myModel;</code></pre>
+					<p>This model allows LeUtils to leverage TypeScript and provide top
+					class type definitions when using this module.</p>
+					<p>The next step is to generate the type definition from this model using Urd CLI:</p>
+					<pre><code class="language-bash">urd g i</code></pre>
+					<p>This will create a <code>myModel.urd-item.ts</code> in the same folder as <code>myModel.urd-model.ts</code></p>
+					<p>Now that we have the notetags data and the model that reflect their structure,
+					we can use this module to extract any tag and value we want.</p>
 					<h3 id="example">Example</h3>
-					<pre><code class="language-javascript"><span class="hljs-keyword">let</span> tag = tags(actor);
-<span class="hljs-keyword">let</span> getter = tag.get();
+					<pre><code class="language-ts"><span class="hljs-keyword">import</span> myModel <span class="hljs-keyword">from</span> <span class="hljs-string">'./tags/test.urd-model'</span>;
+<span class="hljs-keyword">import</span> { tags } <span class="hljs-keyword">from</span> <span class="hljs-string">'leutils'</span>;
+<span class="hljs-keyword">import</span> { MyModelItem, MyModelItemProps } <span class="hljs-keyword">from</span> <span class="hljs-string">'./tags/test.urd-item'</span>;
+
+<span class="hljs-keyword">let</span> tag = tags&lt;MyModelItem, MyModelItemProps&gt;(actor, myModel);</code></pre>
+					<p>Up to this point, there are two ways to exploit the <code>tag</code> object.</p>
+					<h4 id="chaining">Chaining</h4>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> getter = tag.getter();
 
 <span class="hljs-keyword">let</span> title = <span class="hljs-keyword">await</span> getter.title(); <span class="hljs-comment">// Hero</span>
 
-<span class="hljs-keyword">let</span> my_tag = <span class="hljs-keyword">await</span> getter.my_tag();
+<span class="hljs-keyword">let</span> myTag = <span class="hljs-keyword">await</span> getter.my_tag();
 <span class="hljs-keyword">let</span> goldGainPerStep = <span class="hljs-keyword">await</span> myTag.gold_gain_per_step(); <span class="hljs-comment">// 515</span>
 <span class="hljs-keyword">let</span> storageSize = <span class="hljs-keyword">await</span> myTag.storage_size(); <span class="hljs-comment">// (50 + 20) * 1.3 = 91</span>
 <span class="hljs-keyword">let</span> passive = <span class="hljs-keyword">await</span> myTag.passive(); <span class="hljs-comment">// Power I, Self-Healing II, Counter III</span>
-<span class="hljs-keyword">let</span> bio = <span class="hljs-keyword">await</span> myTag.bio(); <span class="hljs-comment">// I am a simple adventurer.</span></code></pre>
+<span class="hljs-keyword">let</span> bio = <span class="hljs-keyword">await</span> myTag.bio(); <span class="hljs-comment">// I am a simple adventurer.</span>
+
+<span class="hljs-keyword">let</span> goldGainPerStep2 = <span class="hljs-keyword">await</span> getter.my_tag().gold_gain_per_step(); <span class="hljs-comment">// This works too</span></code></pre>
+					<h4 id="magic-string-version">Magic String version</h4>
+					<p>Note that auto-completion is provided for these strings.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> title = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'title'</span>); <span class="hljs-comment">// Hero</span>
+
+<span class="hljs-keyword">let</span> myTag = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag'</span>);
+<span class="hljs-keyword">let</span> goldGainPerStep = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag.gold_gain_per_step'</span>); <span class="hljs-comment">// 515</span>
+<span class="hljs-keyword">let</span> storageSize = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag.storage_size'</span>); <span class="hljs-comment">// (50 + 20) * 1.3 = 91</span>
+<span class="hljs-keyword">let</span> passive = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag.passive'</span>); <span class="hljs-comment">// Power I, Self-Healing II, Counter III</span>
+<span class="hljs-keyword">let</span> bio = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag.bio'</span>); <span class="hljs-comment">// I am a simple adventurer.</span></code></pre>
 					<p>Note how all the getters used are asynchronous. That is because any value
-						of a notetag can be evaluated as a script, and be given a context.
-					See the following example.</p>
+					of a notetag can be evaluated as a script, and be given a context:</p>
 					<h3 id="evaluating-notetags">Evaluating notetags</h3>
-					<p>Let&#39;s say our actor notetags content is now the following:</p>
+					<p>Let&#39;s say our actor notetags content is now the following, without any addition tag from states
+					or gear:</p>
 					<pre><code><span class="hljs-section">&lt;my_tag&gt;</span>
 <span class="hljs-section">&lt;!storage_size&gt;</span>
 <span class="hljs-attribute">return</span> 50 + context.a;
 <span class="hljs-section">&lt;/storage_size&gt;</span>
+
 <span class="hljs-section">&lt;!pet_name&gt;</span>
 <span class="hljs-attribute">return</span> context.title + ' Botan';
 <span class="hljs-section">&lt;/pet_name&gt;</span>
 <span class="hljs-section">&lt;/my_tag&gt;</span></code></pre><p>These values can be obtained as such:</p>
-					<pre><code class="language-javascript"><span class="hljs-keyword">let</span> tag = tags(actor);
-<span class="hljs-keyword">let</span> getter = tag.get();
-<span class="hljs-keyword">let</span> my_tag = <span class="hljs-keyword">await</span> getter.my_tag();
+					<h4 id="first-version">First Version</h4>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> getter = tag.getter();
+<span class="hljs-keyword">let</span> myTag = <span class="hljs-keyword">await</span> getter.my_tag(); <span class="hljs-comment">// No context passed here</span>
+<span class="hljs-comment">// It's the same as:</span>
+myTag = <span class="hljs-keyword">await</span> getter.my_tag({}); <span class="hljs-comment">// Empty context</span>
 
-<span class="hljs-keyword">let</span> storageSize = <span class="hljs-keyword">await</span> myTag.storage_size({ <span class="hljs-attr">a</span>: <span class="hljs-number">100</span> }); <span class="hljs-comment">// (100 + 20) * 1.3 = 91</span>
-<span class="hljs-keyword">let</span> petName = <span class="hljs-keyword">await</span> myTag.pet_name({ <span class="hljs-attr">title</span>: <span class="hljs-string">'Corrupted'</span>}); <span class="hljs-comment">// Corrupted Botan</span></code></pre>
-					<h3 id="chaining">Chaining</h3>
-					<p>When interacting with <code>tags</code>, it&#39;s possible to chain its properties.</p>
-					<pre><code class="language-javascript"><span class="hljs-keyword">let</span> tag = tags(actor);
+<span class="hljs-keyword">let</span> storageSize = <span class="hljs-keyword">await</span> myTag.storage_size({ a: <span class="hljs-number">100</span> }); <span class="hljs-comment">// 150</span>
+<span class="hljs-keyword">let</span> petName = <span class="hljs-keyword">await</span> myTag.pet_name({ title: <span class="hljs-string">'Corrupted'</span>}); <span class="hljs-comment">// Corrupted Botan</span></code></pre>
+					<h4 id="second-version">Second Version</h4>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> myTag = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag'</span>); <span class="hljs-comment">// No context passed here</span>
+<span class="hljs-comment">// It's the same as:</span>
+<span class="hljs-keyword">let</span> myTag = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag'</span>, {});
 
-<span class="hljs-keyword">let</span> storageSize = <span class="hljs-keyword">await</span> tag.get().my_tag().storage_size({ <span class="hljs-attr">a</span>: <span class="hljs-number">100</span> });</code></pre>
+<span class="hljs-keyword">let</span> storageSize = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag.storage_size'</span>, {}, { a: <span class="hljs-number">100</span> }); <span class="hljs-comment">// 150</span>
+<span class="hljs-comment">// The first parameter after the property string is the context for evaluating 'my_tag'</span>
+
+<span class="hljs-keyword">let</span> petName = <span class="hljs-keyword">await</span> tag.get(<span class="hljs-string">'my_tag.pet_name'</span>, {}, { title: <span class="hljs-string">'Corrupted'</span>}); <span class="hljs-comment">// Corrupted Botan</span></code></pre>
+					<h3 id="collecting-values">Collecting values</h3>
+					<p>Additionally, this module let you collect all the defined values of a tag within the battler&#39;s notetags
+					and his states and gear.</p>
+					<p>Let&#39;s say we have the following notetags:
+					<em>Actor</em></p>
+					<pre><code><span class="hljs-params">&lt;my_tag&gt;</span>
+<span class="hljs-symbol">gold_gain_per_step:</span> <span class="hljs-number">10</span>
+gold_gain_per_step%: <span class="hljs-number">200</span>
+<span class="hljs-params">&lt;/my_tag&gt;</span>
+<span class="hljs-symbol">
+title:</span> Hero</code></pre><p><em>Armor equipped by actor</em></p>
+					<pre><code><span class="hljs-params">&lt;my_tag&gt;</span>
+<span class="hljs-symbol">gold_gain_per_step:</span> <span class="hljs-number">15</span>
+gold_gain_per_step+: <span class="hljs-number">100</span>
+<span class="hljs-params">&lt;/my_tag&gt;</span>
+<span class="hljs-symbol">
+title:</span> Shadow</code></pre><p>These notetags can be collected this way:</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> allGoldGainPerSteps = <span class="hljs-keyword">await</span> tag.collect(<span class="hljs-string">'my_tag.gold_gain_per_step'</span>); <span class="hljs-comment">// [10, 15]</span>
+<span class="hljs-keyword">let</span> allGoldGainPerStepPlusValues = <span class="hljs-keyword">await</span> tag.collect(<span class="hljs-string">'my_tag.gold_gain_per_step+'</span>); <span class="hljs-comment">// [100]</span>
+<span class="hljs-keyword">let</span> allGoldGainPerStepRates = <span class="hljs-keyword">await</span> tag.collect(<span class="hljs-string">'my_tag.gold_gain_per_step%'</span>); <span class="hljs-comment">// [200]</span>
+
+<span class="hljs-comment">// Alternative version:</span>
+<span class="hljs-keyword">let</span> collector = tag.collector();
+<span class="hljs-keyword">let</span> allTitles = <span class="hljs-keyword">await</span> collector.title(); <span class="hljs-comment">// ['Hero', 'Shadow']</span>
+<span class="hljs-keyword">let</span> allGoldGainPerSteps2 = <span class="hljs-keyword">await</span> collector.my_tag().gold_gain_per_step(); <span class="hljs-comment">// [10, 15]</span>
+<span class="hljs-keyword">let</span> allGoldGainPerStepsPlusValues2 = <span class="hljs-keyword">await</span> collector.my_tag().gold_gain_per_stepPlus(); <span class="hljs-comment">// [100]</span></code></pre>
 					<h3 id="watching-changes">Watching changes</h3>
 					<p>It is possible to watch changes when a value is altered, for example
-					when a battler&#39;s equipment change or when his states changes.</p>
-					<pre><code class="language-javascript"><span class="hljs-keyword">let</span> tag = tags(actor);
-<span class="hljs-keyword">let</span> watcher = tag.watch();
+					when a battler&#39;s equipment change or when his states change.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> tag = tags(actor);
 
-<span class="hljs-keyword">await</span> watcher.my_tag().storage_size({ <span class="hljs-attr">a</span>: <span class="hljs-number">100</span> }, (tagResult: any, <span class="hljs-attr">beforeValue</span>: any, <span class="hljs-attr">afterValue</span>: any) =&gt; {
- <span class="hljs-comment">// Do something with arguments</span>
- <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// Return true to dispose of the watcher</span>
-});</code></pre>
-					<h3 id="collecting-values">Collecting values</h3>
-					<p>Finally, it&#39;s possible to get all the values of a specific tag or property based on the battler&#39;s class,
-					gear, states, etc.</p>
-					<p>Given the following notetags:
-					<em>Actor</em></p>
-					<pre><code><span class="hljs-symbol">title:</span> Hero</code></pre><p><em>Armor equiped by actor</em></p>
-					<pre><code><span class="hljs-params">&lt;my_tag&gt;</span>
-storage_size+: <span class="hljs-number">20</span>
-<span class="hljs-params">&lt;/my_tag&gt;</span>
-<span class="hljs-symbol">
-title:</span> Shadow</code></pre><p><em>Affected state on actor</em></p>
-					<pre><code><span class="hljs-params">&lt;my_tag&gt;</span>
-storage_size+: <span class="hljs-number">50</span>
-<span class="hljs-params">&lt;/my_tag&gt;</span>
-<span class="hljs-symbol">
-title:</span> Oracle</code></pre><p>Values can be collected as such:</p>
-					<pre><code class="language-javascript"><span class="hljs-keyword">let</span> tag = tags(actor);
-<span class="hljs-keyword">let</span> collector = tag.collect();
+<span class="hljs-comment">// Observe a single value</span>
+<span class="hljs-keyword">let</span> observable = tag.observable(<span class="hljs-string">'my_tag.gold_gain_per_step'</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// Default value is 0</span>
+<span class="hljs-comment">// You have to register a function that return a context for each property</span>
+observable.onGetContext(<span class="hljs-function">(<span class="hljs-params">prop: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+ <span class="hljs-keyword">switch</span> (prop) {
+   <span class="hljs-keyword">case</span> <span class="hljs-string">'gold_gain_per_step'</span>: <span class="hljs-keyword">return</span> { a: <span class="hljs-number">100</span>};
+   <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> {};
+ }
+});
+observable.onChange(<span class="hljs-function">(<span class="hljs-params">tag, beforeValue, afterValue</span>) =&gt;</span> {
+ <span class="hljs-comment">// A change has been detected here</span>
+});
+<span class="hljs-comment">// Don't forget to dispose of the observable when it is no more needed</span>
+observable.dispose();</code></pre>
+					<h4 id="watching-any-or-all-chances">Watching any or all chances</h4>
+					<p>It&#39;s possible to react to any or all changes within a set of notetags.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">let</span> goldGainObservable = tag.observable(<span class="hljs-string">'my_tag.gold_gain_per_step'</span>, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// initialize the observable...</span>
 
-<span class="hljs-keyword">let</span> allPocketSizeAdditions = <span class="hljs-keyword">await</span> collector.my_tag().storage_sizePlus(); <span class="hljs-comment">// [20, 50]</span>
-<span class="hljs-keyword">let</span> allTitles = <span class="hljs-keyword">await</span> collector.title(); <span class="hljs-comment">// ['Hero', 'Shadow',' Oracle]</span></code></pre>
-					<h3 id="typings">Typings</h3>
-					<p>When used on a TypeSccript project, it is possible to get full typings of the <code>tags</code>
-					when using a [UrdModelItem] as a generic type.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">let</span> tag = tags&lt;MyTagItem&gt;(actor);
+<span class="hljs-keyword">let</span> titleObservable = tag.observable(<span class="hljs-string">'title'</span>, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// initialize the observable...</span>
 
-tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTagItem</span></code></pre>
+<span class="hljs-comment">// Watch any change</span>
+<span class="hljs-keyword">let</span> anyObservable = tag.observeAny([goldGainObservable, titleObservable], <span class="hljs-function">(<span class="hljs-params">tag</span>) =&gt;</span> {
+ <span class="hljs-comment">// either the value of 'gold_gain_per_step' or 'title' changed</span>
+});
+
+<span class="hljs-comment">// Watch any change</span>
+<span class="hljs-keyword">let</span> allObservable = tag.observeAll([goldGainObservable, titleObservable], <span class="hljs-function">(<span class="hljs-params">tag</span>) =&gt;</span> {
+ <span class="hljs-comment">// all values changed since the last iteration</span>
+});
+
+<span class="hljs-comment">// These observables can be disposed as well</span>
+anyObservable.dispose();
+allObservable.dispose();
+
+<span class="hljs-comment">// Bulk observables can even be used within another observable:</span>
+<span class="hljs-keyword">let</span> observableCeption = tag.observeAll([anyObservable1, anyObservable2], <span class="hljs-function">(<span class="hljs-params">tag</span>) =&gt;</span> {
+
+});
+</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -177,13 +276,16 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/tagsmanaging.cachedtagresult.html" class="tsd-kind-icon">Cached<wbr>Tag<wbr>Result</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../classes/tagsmanaging.tagobservable.html" class="tsd-kind-icon">Tag<wbr>Observable</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../classes/tagsmanaging.tagresult.html" class="tsd-kind-icon">Tag<wbr>Result</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../classes/tagsmanaging.watcherhandler.html" class="tsd-kind-icon">Watcher<wbr>Handler</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../classes/tagsmanaging.tagsbulkobservable.html" class="tsd-kind-icon">Tags<wbr>Bulk<wbr>Observable</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="tagsmanaging.html#lesserwatcher" class="tsd-kind-icon">Lesser<wbr>Watcher</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="tagsmanaging.html#watchable" class="tsd-kind-icon">Watchable</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="tagsmanaging.html#watcher" class="tsd-kind-icon">Watcher</a></li>
 							</ul>
@@ -200,12 +302,43 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="lesserwatcher" class="tsd-anchor"></a>
+					<h3>Lesser<wbr>Watcher</h3>
+					<div class="tsd-signature tsd-kind-icon">Lesser<wbr>Watcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L320">Core/TagsManaging.ts:320</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>tagResult<span class="tsd-signature-symbol">: </span><a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>tagResult: <a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="watchable" class="tsd-anchor"></a>
 					<h3>Watchable</h3>
 					<div class="tsd-signature tsd-kind-icon">Watchable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:203</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L321">Core/TagsManaging.ts:321</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -220,7 +353,7 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 					<div class="tsd-signature tsd-kind-icon">Watcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Core/TagsManaging.ts:202</li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L319">Core/TagsManaging.ts:319</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -228,7 +361,7 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>tagResult<span class="tsd-signature-symbol">: </span><a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, beforeValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, afterValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>tagResult<span class="tsd-signature-symbol">: </span><a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, beforeValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, afterValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -244,7 +377,7 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 												<h5>afterValue: <span class="tsd-signature-type">any</span></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 									</li>
 								</ul>
 							</li>
@@ -258,19 +391,22 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 					<a name="tags" class="tsd-anchor"></a>
 					<h3>tags</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">tags&lt;T&gt;<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RPGObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Game_Battler</span>, model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Model</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">tags&lt;T, TProp&gt;<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RPGObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Game_Battler</span>, model<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Model</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Core/TagsManaging.ts:175</li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L284">Core/TagsManaging.ts:284</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>T</h4>
+								</li>
+								<li>
+									<h4>TProp</h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -282,7 +418,7 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 									<h5>model: <span class="tsd-signature-type">Model</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProp</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -367,11 +503,20 @@ tag.gold(); <span class="hljs-comment">// TypeError: Cannot find 'gold' of MyTag
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/tagsmanaging.cachedtagresult.html" class="tsd-kind-icon">Cached<wbr>Tag<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../classes/tagsmanaging.tagobservable.html" class="tsd-kind-icon">Tag<wbr>Observable</a>
+					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../classes/tagsmanaging.tagresult.html" class="tsd-kind-icon">Tag<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../classes/tagsmanaging.watcherhandler.html" class="tsd-kind-icon">Watcher<wbr>Handler</a>
+						<a href="../classes/tagsmanaging.tagsbulkobservable.html" class="tsd-kind-icon">Tags<wbr>Bulk<wbr>Observable</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="tagsmanaging.html#lesserwatcher" class="tsd-kind-icon">Lesser<wbr>Watcher</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="tagsmanaging.html#watchable" class="tsd-kind-icon">Watchable</a>

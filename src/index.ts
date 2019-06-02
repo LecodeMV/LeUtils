@@ -3,9 +3,6 @@ import * as Sprites from './Sprites';
 import * as Windows from './Windows';
 import './Extends';
 
-/**
- * @namespace LeUtils
- */
 const Main = {
   ...Core,
   ...Sprites,
@@ -14,3 +11,4 @@ const Main = {
 declare var window;
 window.LeUtils = Main;
 export default Main;
+export const $ = Core.$;

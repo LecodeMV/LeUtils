@@ -1,8 +1,7 @@
-
 /**
  * ## A complex and complete module to parse and evaluate notetags of RPG Maker MV data objects.
  *
- * Given the following notetags:  
+ * Let's say we have the following notetags:
  * *Actor*
  * ```
  * <my_tag>
@@ -15,11 +14,11 @@
  * I am a simple adventurer.
  * </bio>
  * </my_tag>
- * 
+ *
  * title: Hero
  * ```
  *
- * *Armor equiped by actor*
+ * *Armor equipped by actor*
  * ```
  * <my_tag>
  * storage_size+: 20
@@ -38,123 +37,234 @@
  * This module allow to interpret the notetags values of this actor, factoring his equipped gear and states.
  * When parsing and interpreting the values of these notetags, this module follow the following rules:
  * * Base values are overwritten according to this priority list: State > Equipment > Class > Battler.
- * * `+` is used to add raw values and `%` to modify the final value by a percentage.
+ * * `+` suffix to a notetag is used to add raw values and `%` to modify the final value by a percentage.
+ * 
+ * ### Supporting TypeScript
+ * 
+ * The first thing to do before exploiting this module, is to define a Urd Model for your
+ * notetags.
+ * 
+ * **myModel.urd-model.ts**
+ * ```js
+ * import { Model } from '@urd/core';
+ * 
+ * export const myModel: Model = {
+ *  title: {
+ *    type: 'string'
+ *  },
+ *  my_tag: {
+ *    type: 'structure',
+ *    fields: {
+ *      gold_gain_per_step: {
+ *        type: 'number',
+ *      },
+ *      storage_size: {
+ *        type: 'number'
+ *      },
+ *      pet_name: {
+ *        type: 'string'
+ *      },
+ *      passive: {
+ *        type: 'list'
+ *      },
+ *      bio: {
+ *        type: 'text'
+ *      }
+ *    }
+ *  }
+ * };
+ * 
+ * export default myModel;
+ * ```
+ * 
+ * This model allows LeUtils to leverage TypeScript and provide top
+ * class type definitions when using this module.
+ * 
+ * The next step is to generate the type definition from this model using Urd CLI:
+ * ```bash
+ * urd g i
+ * ```
+ * This will create a `myModel.urd-item.ts` in the same folder as `myModel.urd-model.ts`
+ * 
+ * Now that we have the notetags data and the model that reflect their structure,
+ * we can use this module to extract any tag and value we want.
  *
  * ### Example
- * ```javascript
- * let tag = tags(actor);
- * let getter = tag.get();
+ * ```ts
+ * import myModel from './tags/test.urd-model';
+ * import { tags } from 'leutils';
+ * import { MyModelItem, MyModelItemProps } from './tags/test.urd-item';
  * 
+ * let tag = tags<MyModelItem, MyModelItemProps>(actor, myModel);
+ * ```
+ * 
+ * Up to this point, there are two ways to exploit the `tag` object.
+ * 
+ * #### Chaining
+ * ```ts
+ * let getter = tag.getter();
+ *
  * let title = await getter.title(); // Hero
- * 
- * let my_tag = await getter.my_tag();
+ *
+ * let myTag = await getter.my_tag();
  * let goldGainPerStep = await myTag.gold_gain_per_step(); // 515
  * let storageSize = await myTag.storage_size(); // (50 + 20) * 1.3 = 91
  * let passive = await myTag.passive(); // Power I, Self-Healing II, Counter III
  * let bio = await myTag.bio(); // I am a simple adventurer.
+ * 
+ * let goldGainPerStep2 = await getter.my_tag().gold_gain_per_step(); // This works too
  * ```
+ * 
+ * #### Magic String version
+ * Note that auto-completion is provided for these strings.
+ * ```ts
+ * let title = await tag.get('title'); // Hero
+ *
+ * let myTag = await tag.get('my_tag');
+ * let goldGainPerStep = await tag.get('my_tag.gold_gain_per_step'); // 515
+ * let storageSize = await tag.get('my_tag.storage_size'); // (50 + 20) * 1.3 = 91
+ * let passive = await tag.get('my_tag.passive'); // Power I, Self-Healing II, Counter III
+ * let bio = await tag.get('my_tag.bio'); // I am a simple adventurer.
+ * ```
+ * 
  *
  * Note how all the getters used are asynchronous. That is because any value
- * of a notetag can be evaluated as a script, and be given a context.
- * See the following example.
+ * of a notetag can be evaluated as a script, and be given a context:
  *
  * ### Evaluating notetags
- * Let's say our actor notetags content is now the following:
+ * Let's say our actor notetags content is now the following, without any addition tag from states
+ * or gear:
  *
  * ```
  * <my_tag>
  * <!storage_size>
  * return 50 + context.a;
  * </storage_size>
+ * 
  * <!pet_name>
  * return context.title + ' Botan';
  * </pet_name>
  * </my_tag>
  * ```
  * These values can be obtained as such:
- * ```javascript
- * let tag = tags(actor);
- * let getter = tag.get();
- * let my_tag = await getter.my_tag();
+ * 
+ * #### First Version
+ * ```ts
+ * let getter = tag.getter();
+ * let myTag = await getter.my_tag(); // No context passed here
+ * // It's the same as:
+ * myTag = await getter.my_tag({}); // Empty context
  *
- * let storageSize = await myTag.storage_size({ a: 100 }); // (100 + 20) * 1.3 = 91
+ * let storageSize = await myTag.storage_size({ a: 100 }); // 150
  * let petName = await myTag.pet_name({ title: 'Corrupted'}); // Corrupted Botan
  * ```
  * 
- * ### Chaining
- * When interacting with `tags`, it's possible to chain its properties.
- * ```javascript
- * let tag = tags(actor);
+ * #### Second Version
+ * ```ts
+ * let myTag = await tag.get('my_tag'); // No context passed here
+ * // It's the same as:
+ * let myTag = await tag.get('my_tag', {});
  *
- * let storageSize = await tag.get().my_tag().storage_size({ a: 100 });
- * ```
+ * let storageSize = await tag.get('my_tag.storage_size', {}, { a: 100 }); // 150
+ * // The first parameter after the property string is the context for evaluating 'my_tag'
  * 
- * ### Watching changes
- * It is possible to watch changes when a value is altered, for example
- * when a battler's equipment change or when his states changes.
- * 
- * ```javascript
- * let tag = tags(actor);
- * let watcher = tag.watch();
- *
- * await watcher.my_tag().storage_size({ a: 100 }, (tagResult: any, beforeValue: any, afterValue: any) => {
- *  // Do something with arguments
- *  return false; // Return true to dispose of the watcher
- * });
+ * let petName = await tag.get('my_tag.pet_name', {}, { title: 'Corrupted'}); // Corrupted Botan
  * ```
  * 
  * ### Collecting values
- * Finally, it's possible to get all the values of a specific tag or property based on the battler's class,
- * gear, states, etc.
+ * Additionally, this module let you collect all the defined values of a tag within the battler's notetags 
+ * and his states and gear.
  * 
- * Given the following notetags:  
+ * Let's say we have the following notetags:
  * *Actor*
  * ```
+ * <my_tag>
+ * gold_gain_per_step: 10
+ * gold_gain_per_step%: 200
+ * </my_tag>
+ * 
  * title: Hero
  * ```
  *
- * *Armor equiped by actor*
+ * *Armor equipped by actor*
  * ```
  * <my_tag>
- * storage_size+: 20
+ * gold_gain_per_step: 15
+ * gold_gain_per_step+: 100
  * </my_tag>
  * 
  * title: Shadow
  * ```
- *
- * *Affected state on actor*
- * ```
- * <my_tag>
- * storage_size+: 50
- * </my_tag>
- * 
- * title: Oracle
- * ```
- * 
- * Values can be collected as such:
- * 
- * ```javascript
- * let tag = tags(actor);
- * let collector = tag.collect();
- *
- * let allPocketSizeAdditions = await collector.my_tag().storage_sizePlus(); // [20, 50]
- * let allTitles = await collector.title(); // ['Hero', 'Shadow',' Oracle]
- * ```
- * 
- * ### Typings
- * When used on a TypeSccript project, it is possible to get full typings of the `tags`
- * when using a [UrdModelItem] as a generic type.
- * 
+ * These notetags can be collected this way:
  * ```ts
- * let tag = tags<MyTagItem>(actor);
+ * let allGoldGainPerSteps = await tag.collect('my_tag.gold_gain_per_step'); // [10, 15]
+ * let allGoldGainPerStepPlusValues = await tag.collect('my_tag.gold_gain_per_step+'); // [100]
+ * let allGoldGainPerStepRates = await tag.collect('my_tag.gold_gain_per_step%'); // [200]
  * 
- * tag.gold(); // TypeError: Cannot find 'gold' of MyTagItem
+ * // Alternative version:
+ * let collector = tag.collector();
+ * let allTitles = await collector.title(); // ['Hero', 'Shadow']
+ * let allGoldGainPerSteps2 = await collector.my_tag().gold_gain_per_step(); // [10, 15]
+ * let allGoldGainPerStepsPlusValues2 = await collector.my_tag().gold_gain_per_stepPlus(); // [100]
+ * ```
+ *
+ * ### Watching changes
+ * It is possible to watch changes when a value is altered, for example
+ * when a battler's equipment change or when his states change.
+ *
+ * ```ts
+ * let tag = tags(actor);
+ * 
+ * // Observe a single value
+ * let observable = tag.observable('my_tag.gold_gain_per_step', 0); // Default value is 0
+ * // You have to register a function that return a context for each property
+ * observable.onGetContext((prop: string) => {
+ *  switch (prop) {
+ *    case 'gold_gain_per_step': return { a: 100};
+ *    default: return {};
+ *  }
+ * });
+ * observable.onChange((tag, beforeValue, afterValue) => {
+ *  // A change has been detected here
+ * });
+ * // Don't forget to dispose of the observable when it is no more needed
+ * observable.dispose();
  * ```
  * 
+ * #### Watching any or all chances
+ * It's possible to react to any or all changes within a set of notetags.
+ * ```ts
+ * let goldGainObservable = tag.observable('my_tag.gold_gain_per_step', 0);
+ * // initialize the observable...
+ * 
+ * let titleObservable = tag.observable('title', 0);
+ * // initialize the observable...
+ * 
+ * // Watch any change
+ * let anyObservable = tag.observeAny([goldGainObservable, titleObservable], (tag) => {
+ *  // either the value of 'gold_gain_per_step' or 'title' changed
+ * });
+ * 
+ * // Watch any change
+ * let allObservable = tag.observeAll([goldGainObservable, titleObservable], (tag) => {
+ *  // all values changed since the last iteration
+ * });
+ * 
+ * // These observables can be disposed as well
+ * anyObservable.dispose();
+ * allObservable.dispose();
+ * 
+ * // Bulk observables can even be used within another observable:
+ * let observableCeption = tag.observeAll([anyObservable1, anyObservable2], (tag) => {
+ *  
+ * });
+ * 
+ * ```
+ *
  * @module TagsManaging
  */
 
- /** */
+/** */
 import {
   UrdRepository,
   Model,
@@ -164,22 +274,24 @@ import {
   Urd,
   ModelField
 } from '@urd/core';
-import { Game_Battler, Game_Enemy, RPGObject, DataActor, DataEnemy } from 'mv-lib';
-
+import { Game_Battler, Game_Enemy, RPGObject, DataActor, DataEnemy, DataSkill } from 'mv-lib';
 
 /**
  *
  */
 const symbol = Symbol();
 
-export function tags<T = any>(obj: RPGObject | Game_Battler, model: Model): TagResult<T> {
+export function tags<T = any, TProp = any>(
+  obj: RPGObject | Game_Battler,
+  model: Model
+): TagResult<T, TProp> {
   if (obj[symbol]) {
     return obj[symbol];
   }
-  return (obj[symbol] = makeTagResult<T>(obj, model));
+  return (obj[symbol] = makeTagResult<T, TProp>(obj, model));
 }
 
-function makeTagResult<T>(obj: RPGObject | Game_Battler, model: Model) {
+function makeTagResult<T, TProp>(obj: RPGObject | Game_Battler, model: Model) {
   let rpgObject: DataActor | DataEnemy = obj as any;
   if (obj instanceof Game_Battler) {
     rpgObject = obj.isActor() ? obj.actor() : (obj as Game_Enemy).enemy();
@@ -187,7 +299,12 @@ function makeTagResult<T>(obj: RPGObject | Game_Battler, model: Model) {
   const note = noteToValidUrdText(rpgObject.note);
   const repository = new UrdRepository<T>(model, 'notetag');
   repository.set('item', note);
-  return new TagResult<T>(repository, rpgObject, obj instanceof Game_Battler ? obj : null, model);
+  return new TagResult<T, TProp>(
+    repository,
+    rpgObject,
+    obj instanceof Game_Battler ? obj : null,
+    model
+  );
 }
 
 function noteToValidUrdText(note: string) {
@@ -199,34 +316,97 @@ function noteToValidUrdText(note: string) {
   });
 }
 
-export type Watcher<T> = (tagResult: TagResult<T>, beforeValue: any, afterValue: any) => boolean;
+export type Watcher<T> = (tagResult: TagResult<T>, beforeValue: any, afterValue: any) => void;
+export type LesserWatcher<T> = (tagResult: TagResult<T>) => void;
 export declare type Watchable<T> = {
   [P in keyof T]: T[P] extends (...args: any) => any
     ? (context?: Object, watcher?: Watcher<T>, id?: string) => Watchable<ReturnType<T[P]>>
     : never
 };
-export class WatcherHandler<T> {
-  tagResult: TagResult<T>;
-  watcher: Watcher<T>;
-  oldValue: any;
-  path: string;
-  contexts: Object[];
 
-  constructor(tagResult: TagResult<T>, watcher: Watcher<T>, path: string, contexts: Object[]) {
-    this.tagResult = tagResult;
+export class TagObservable<T, TProp> {
+  watcher: Watcher<T>;
+  oldValue: TProp;
+  contextGetter: (property: string) => Object;
+  constructor(
+    public tagResult: TagResult<T>,
+    public path: string,
+    iniValue: TProp,
+    public id: string
+  ) {
+    this.oldValue = iniValue;
+  }
+
+  onGetContext(func: (property: string) => Object) {
+    this.contextGetter = func;
+  }
+
+  onChange(watcher: Watcher<T>) {
     this.watcher = watcher;
-    this.path = path;
-    this.contexts = contexts;
+  }
+
+  dispose() {
+    this.tagResult.removeObservable(this);
   }
 
   async check() {
-    let value = await this.tagResult.getFromPath(this.path.split('.'), this.contexts);
+    let contexts = this._getContexts();
+    let value = ((await this.tagResult._getFromPath(
+      this.path.split('.'),
+      contexts
+    )) as any) as TProp;
     if (value !== this.oldValue) {
       this.watcher(this.tagResult, this.oldValue, value);
       this.oldValue = value;
+      return true;
     }
+    return false;
+  }
+
+  _getContexts() {
+    return this.path.split('.').map(str => this.contextGetter(str));
   }
 }
+
+export class TagsBulkObservable<T, TProp> extends TagObservable<T, TProp> {
+  watcher: LesserWatcher<T>;
+  strategy: 'any' | 'all';
+  children: TagObservable<T, TProp>[] = [];
+
+  async check(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let promises = this.children.map(c => c.check());
+      switch (this.strategy) {
+        case 'any':
+          let resolved = false,
+            resolvedNbr = 0;
+          const onValue = (value: boolean) => {
+            resolvedNbr++;
+            if (resolved) return;
+            if (value) {
+              resolved = true;
+              this.watcher(this.tagResult);
+              resolve(true);
+            } else if (resolvedNbr === promises.length) {
+              resolve(false);
+            }
+          };
+          for (const promise of promises) {
+            promise.then(onValue);
+          }
+          break;
+
+        case 'all':
+          Promise.all(promises).then(() => {
+            this.watcher(this.tagResult);
+            resolve(true);
+          });
+      }
+      return false;
+    });
+  }
+}
+
 const oldRefresh = Game_Battler.prototype.refresh;
 Game_Battler.prototype.refresh = function() {
   oldRefresh.call(this);
@@ -235,7 +415,7 @@ Game_Battler.prototype.refresh = function() {
     : (this as Game_Enemy).enemy();
   let tag: TagResult<any> = rpgObject[symbol];
   if (tag) {
-    tag.checkWatchers();
+    tag.checkObservables();
   }
 };
 
@@ -247,14 +427,17 @@ type CollectableWrapper<T> = {
     ? ReplaceReturnType<T[P], Collectable<CollectableWrapper<ReturnType<T[P]>>>>
     : T[P]
 };
+type UnPromisify<T> = T extends Promise<infer U> ? U : T;
+
 const Adapted = '__$$';
-export class TagResult<T> {
+export class TagResult<T, TProp = any> {
   repository: UrdRepository<T>;
   rpgObject: RPGObject;
   battler: Game_Battler;
   model: Model;
   patterns: ModelPattern[];
-  watcherHandlers: { [id: string]: WatcherHandler<T> } = {};
+  cachedResults: { [key: string]: CachedTagResult } = {};
+  observables: { [id: string]: TagObservable<T, TProp> } = {};
 
   constructor(
     repository: UrdRepository<T>,
@@ -290,12 +473,21 @@ export class TagResult<T> {
     return this.repository.exists(value);
   }
 
-  get(context?: Object): Chainable<T> {
+  getter(context?: Object): Chainable<T> {
     const item = this.raw(context);
     return UrdUtils.proxymise(this._makeGetProxy(item));
   }
 
-  _makeGetProxy(item: Object, path = []) {
+  get<I extends TProp, K extends keyof TProp>(path: K, ...contextArr: Object[]): I[K] {
+    return this._getFromPath(
+      path.toString().split('.'),
+      contextArr.map(context => {
+        return { context };
+      })
+    ) as any;
+  }
+
+  _makeGetProxy(item: Object, path = [], optionArray = []) {
     return new Proxy(item as any, {
       get: (target, p) => {
         if (typeof p === 'symbol') {
@@ -311,10 +503,19 @@ export class TagResult<T> {
             throw new Error(`Can't find ${p} in the model. Path is ${pathStr}`);
           }
           return async (options: any) => {
+            // Does not make any significant improvement.
+
+            // let key = [...path, p, 'get'].join('.');
+            // let cachedResult =
+            //   this.cachedResults[key] || new CachedTagResult(this, [...path, p], 'get');
+            // if (cachedResult.isUpdated()) {
+            //   return cachedResult.value;
+            // }
+
             let mainValue = await this._getMainValue(target, p, [...path, p], pattern, options);
             switch (pattern.type) {
               case 'structure':
-                return this._makeGetProxy(mainValue, [...path, p]);
+                return this._makeGetProxy(mainValue, [...path, p], [...optionArray, options]);
               case 'number':
                 let numberValue = Number(mainValue);
                 let plusValues = await this._getAllValues(
@@ -432,9 +633,18 @@ export class TagResult<T> {
     });
   }
 
-  collect(context?: Object): CollectableWrapper<Chainable<T>> {
+  collector(context?: Object): CollectableWrapper<Chainable<T>> {
     const item = this.raw(context);
     return UrdUtils.proxymise(this._makeCollectProxy(item));
+  }
+
+  collect<I extends TProp, K extends keyof TProp>(path: K, ...contextArr: Object[]): I[K] {
+    return this._collectFromPath(
+      path.toString().split('.'),
+      contextArr.map(context => {
+        return { context };
+      })
+    ) as any;
   }
 
   _makeCollectProxy(item: Object, path = []) {
@@ -481,63 +691,99 @@ export class TagResult<T> {
     return this.repository.interpret('item', context);
   }
 
-  watch(): Watchable<Chainable<T>> {
-    const item = this.raw();
-    return UrdUtils.proxymise(this._makeWatcherProxy(item));
+  observable<I extends TProp, K extends keyof TProp>(path: K, iniValue?: UnPromisify<I[K]>) {
+    let id = Object.keys(this.observables).length;
+    let obs = new TagObservable<T, TProp>(this, path as string, iniValue as any | null, String(id));
+    return (this.observables[String(id)] = obs);
   }
 
-  _makeWatcherProxy(item: Object, path = [], contexts = []) {
-    return new Proxy(item as any, {
-      get: (target, p) => {
-        if (typeof p === 'symbol') {
-          return target;
-        }
-        if (p === 'then') {
-          return target.then ? target.then.bind(target) : Promise.resolve(target);
-        }
-        if (typeof p === 'string') {
-          const pathStr = ['__root__', ...path].join('.');
-          const pattern = this.patterns.find(pat => pat.id === p && pat.path === pathStr);
-          if (!pattern) {
-            throw new Error(`Can't find ${p} in the model. Path is ${pathStr}`);
-          }
-          return (context = {}, watcher?: Watcher<T>, id: string = '1') => {
-            this.registerWatcher(watcher, [...path, p].join('.'), id, [...contexts, context]);
-            switch (pattern.type) {
-              case 'structure':
-                return this._makeWatcherProxy({}, [...path, p], [...contexts, context]);
-              case 'number':
-              case 'string':
-              case 'list':
-              case 'text':
-              case 'map':
-              case 'code':
-                return null;
-              default:
-                throw new Error('Unhandled type');
-            }
-          };
-        }
-        return target[p];
-      }
-    });
+  observeAny<K, KProp>(obsArr: TagObservable<K, KProp>[], watcher: LesserWatcher<T>) {
+    let id = Object.keys(this.observables).length;
+    let obs = new TagsBulkObservable<K, KProp>(this as any, '', null, String(id));
+    obs.children = obsArr;
+    obs.strategy = 'any';
+    obs.onChange(watcher as any);
+    //@ts-ignore
+    return (this.observables[String(id)] = obs);
   }
 
-  registerWatcher<T = any>(watcher: Watcher<T>, path: string, id: string, contexts: Object[]) {
-    if (!watcher) {
-      delete this.watcherHandlers[id];
-      return;
-    }
-    this.watcherHandlers[id] = new WatcherHandler<any>(this, watcher, path, contexts);
+  observeAll<K, KProp>(obsArr: TagObservable<K, KProp>[], watcher: LesserWatcher<T>) {
+    let id = Object.keys(this.observables).length;
+    let obs = new TagsBulkObservable<K, KProp>(this as any, '', null, String(id));
+    obs.children = obsArr;
+    obs.strategy = 'all';
+    obs.onChange(watcher as any);
+    //@ts-ignore
+    return (this.observables[String(id)] = obs);
   }
 
-  checkWatchers() {
-    for (const [key, watcherHandler] of Object.entries(this.watcherHandlers)) {
-      watcherHandler.check();
+  removeObservable(obs: TagObservable<T, TProp>) {
+    delete this.observables[String(obs.id)];
+  }
+
+  checkObservables() {
+    for (const obs of Object.values(this.observables)) {
+      obs.check();
     }
   }
 
-  async rawFromPath(path: string[], options: any) {
+  // watch(): Watchable<Chainable<T>> {
+  //   const item = this.raw();
+  //   return UrdUtils.proxymise(this._makeWatcherProxy(item));
+  // }
+
+  // _makeWatcherProxy(item: Object, path = [], contexts = []) {
+  //   return new Proxy(item as any, {
+  //     get: (target, p) => {
+  //       if (typeof p === 'symbol') {
+  //         return target;
+  //       }
+  //       if (p === 'then') {
+  //         return target.then ? target.then.bind(target) : Promise.resolve(target);
+  //       }
+  //       if (typeof p === 'string') {
+  //         const pathStr = ['__root__', ...path].join('.');
+  //         const pattern = this.patterns.find(pat => pat.id === p && pat.path === pathStr);
+  //         if (!pattern) {
+  //           throw new Error(`Can't find ${p} in the model. Path is ${pathStr}`);
+  //         }
+  //         return (context = {}, watcher?: Watcher<T>, id: string = '1') => {
+  //           this.registerWatcher(watcher, [...path, p].join('.'), id, [...contexts, context]);
+  //           switch (pattern.type) {
+  //             case 'structure':
+  //               return this._makeWatcherProxy({}, [...path, p], [...contexts, context]);
+  //             case 'number':
+  //             case 'string':
+  //             case 'list':
+  //             case 'text':
+  //             case 'map':
+  //             case 'code':
+  //               return null;
+  //             default:
+  //               throw new Error('Unhandled type');
+  //           }
+  //         };
+  //       }
+  //       return target[p];
+  //     }
+  //   });
+  // }
+
+  // registerWatcher<T = any>(watcher: Watcher<T>, path: string, id: string, contexts: Object[]) {
+  //   if (!watcher) {
+  //     delete this.watcherHandlers[id];
+  //     return;
+  //   }
+  //   this.watcherHandlers[id] = new WatcherHandler<any>(this, watcher, path, contexts);
+  // }
+
+  // checkWatchers() {
+  //   for (const [key, watcherHandler] of Object.entries(this.watcherHandlers)) {
+  //     watcherHandler.check();
+  //   }
+  // }
+
+  async _rawFromPath(path: string[], options: any) {
     let obj = this.raw();
     for (const str of path) {
       if (!obj || !this.exists(obj)) return null;
@@ -548,14 +794,26 @@ export class TagResult<T> {
     return obj;
   }
 
-  async getFromPath(path: string[], optionArray: any[]) {
-    let getter = this.get();
+  async _getFromPath(path: string[], optionArray: any[]) {
+    let getter = this.getter();
     let value = getter;
     for (const [i, str] of Object.entries(path)) {
       if (!value || !this.exists(value)) return null;
       if (!value[str]) return null;
       if (!(typeof value[str] === 'function')) return null;
-      value = await value[str]({ context: optionArray[i] || {} });
+      value = await value[str](optionArray[i] || { context: {} });
+    }
+    return value;
+  }
+
+  async _collectFromPath(path: string[], optionArray: any[]) {
+    let collector = this.collector();
+    let value = collector;
+    for (const [i, str] of Object.entries(path)) {
+      if (!value || !this.exists(value)) return null;
+      if (!value[str]) return null;
+      if (!(typeof value[str] === 'function')) return null;
+      value = await value[str](optionArray[i] || { context: {} });
     }
     return value;
   }
@@ -570,40 +828,40 @@ export class TagResult<T> {
     let defaultValue = this._getDefaultValue(pattern);
     if (this.battler) {
       let rpgObjects = []
-        .concat(this._getInventory(), [
+        .concat(this.getInventory(), [
           this.battler.isActor() ? this.battler.actor() : (this.battler as Game_Enemy).enemy()
         ])
         .filter(v => !!v);
       for (const obj of rpgObjects) {
         let tag = tags(obj, this.model);
-        let value = await tag.rawFromPath(path, options);
+        let value = await tag._rawFromPath(path, options);
         if (value != null) return value;
       }
       return defaultValue;
     }
-    return this.rawFromPath(path, options) || defaultValue;
+    return this._rawFromPath(path, options) || defaultValue;
   }
 
   async _getAllValues(item: Object, prop: string, path: string[], options) {
     const values = [];
     if (this.battler) {
       let rpgObjects = []
-        .concat(this._getInventory(), [
+        .concat(this.getInventory(), [
           this.battler.isActor() ? this.battler.actor() : (this.battler as Game_Enemy).enemy()
         ])
         .filter(v => !!v);
       for (const obj of rpgObjects) {
         let tag = tags(obj, this.model);
-        let value = await tag.rawFromPath(path, options);
+        let value = await tag._rawFromPath(path, options);
         if (value != null) values.push(value);
       }
       return values;
     }
-    let raw = this.rawFromPath(path, options);
+    let raw = this._rawFromPath(path, options);
     return raw ? [raw] : [];
   }
 
-  _getInventory() {
+  getInventory(): RPGObject[] {
     if (this.battler) {
       return [] //[battler._itemOnUse]
         .concat(this.battler.states())
@@ -642,5 +900,45 @@ export class TagResult<T> {
       }
     }
     return defaultValue;
+  }
+}
+
+export class CachedTagResult {
+  tagResult: TagResult<any>;
+  path: string[];
+  operation: 'get' | 'collect';
+  inventoryIds: number[];
+  _value: any;
+  constructor(tagResult: TagResult<any>, path: string[], operation: 'get' | 'collect') {
+    this.tagResult = tagResult;
+    this.path = path;
+    this.operation = operation;
+    this.inventoryIds = this._makeInventoryIds();
+  }
+
+  _makeInventoryIds() {
+    let battler = this.tagResult.battler;
+    if (!battler) return [];
+    return this.tagResult
+      .getInventory()
+      .filter(v => !!v)
+      .map(v => v.id);
+  }
+
+  isUpdated() {
+    let newIds = this._makeInventoryIds();
+    if (newIds != this.inventoryIds) {
+      this.inventoryIds = newIds;
+      return false;
+    }
+    return true;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(value: any) {
+    this._value = value;
   }
 }

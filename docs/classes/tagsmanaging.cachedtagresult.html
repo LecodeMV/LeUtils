@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TweenSheet | leutils</title>
+	<title>CachedTagResult | leutils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/easing.html">Easing</a>
+					<a href="../modules/tagsmanaging.html">TagsManaging</a>
 				</li>
 				<li>
-					<a href="easing.tweensheet.html">TweenSheet</a>
+					<a href="tagsmanaging.cachedtagresult.html">CachedTagResult</a>
 				</li>
 			</ul>
-			<h1>Class TweenSheet</h1>
+			<h1>Class CachedTagResult</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">TweenSheet</span>
+						<span class="target">CachedTagResult</span>
 					</li>
 				</ul>
 			</section>
@@ -82,28 +82,30 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="easing.tweensheet.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="easing.tweensheet.html#_current" class="tsd-kind-icon">_current</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="easing.tweensheet.html#_sheet" class="tsd-kind-icon">_sheet</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="easing.tweensheet.html#_tween" class="tsd-kind-icon">_tween</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#_value" class="tsd-kind-icon">_value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#inventoryids" class="tsd-kind-icon">inventory<wbr>Ids</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#operation" class="tsd-kind-icon">operation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#path" class="tsd-kind-icon">path</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#tagresult" class="tsd-kind-icon">tag<wbr>Result</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="easing.tweensheet.html#current" class="tsd-kind-icon">current</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="easing.tweensheet.html#start" class="tsd-kind-icon">start</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="easing.tweensheet.html#stop" class="tsd-kind-icon">stop</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#_makeinventoryids" class="tsd-kind-icon">_make<wbr>Inventory<wbr>Ids</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tagsmanaging.cachedtagresult.html#isupdated" class="tsd-kind-icon">is<wbr>Updated</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,22 +117,28 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<wbr>Sheet<span class="tsd-signature-symbol">(</span>sheet<span class="tsd-signature-symbol">: </span><a href="../modules/easing.html#tweensheetholder" class="tsd-signature-type">TweenSheetHolder</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="easing.tweensheet.html" class="tsd-signature-type">TweenSheet</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Cached<wbr>Tag<wbr>Result<span class="tsd-signature-symbol">(</span>tagResult<span class="tsd-signature-symbol">: </span><a href="tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, operation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"get"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"collect"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tagsmanaging.cachedtagresult.html" class="tsd-signature-type">CachedTagResult</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L220">Core/Easing.ts:220</a></li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L911">Core/TagsManaging.ts:911</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>sheet: <a href="../modules/easing.html#tweensheetholder" class="tsd-signature-type">TweenSheetHolder</a></h5>
+									<h5>tagResult: <a href="tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>operation: <span class="tsd-signature-type">"get"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"collect"</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="easing.tweensheet.html" class="tsd-signature-type">TweenSheet</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="tagsmanaging.cachedtagresult.html" class="tsd-signature-type">CachedTagResult</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -138,52 +146,87 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="_current" class="tsd-anchor"></a>
-					<h3>_current</h3>
-					<div class="tsd-signature tsd-kind-icon">_current<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="_value" class="tsd-anchor"></a>
+					<h3>_value</h3>
+					<div class="tsd-signature tsd-kind-icon">_value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L219">Core/Easing.ts:219</a></li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L911">Core/TagsManaging.ts:911</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="_sheet" class="tsd-anchor"></a>
-					<h3>_sheet</h3>
-					<div class="tsd-signature tsd-kind-icon">_sheet<span class="tsd-signature-symbol">:</span> <a href="../modules/easing.html#tweensheetholder" class="tsd-signature-type">TweenSheetHolder</a></div>
+					<a name="inventoryids" class="tsd-anchor"></a>
+					<h3>inventory<wbr>Ids</h3>
+					<div class="tsd-signature tsd-kind-icon">inventory<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L218">Core/Easing.ts:218</a></li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L910">Core/TagsManaging.ts:910</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="_tween" class="tsd-anchor"></a>
-					<h3>_tween</h3>
-					<div class="tsd-signature tsd-kind-icon">_tween<span class="tsd-signature-symbol">:</span> <a href="../interfaces/easing.tweenpromise.html" class="tsd-signature-type">TweenPromise</a></div>
+					<a name="operation" class="tsd-anchor"></a>
+					<h3>operation</h3>
+					<div class="tsd-signature tsd-kind-icon">operation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"get"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"collect"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L220">Core/Easing.ts:220</a></li>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L909">Core/TagsManaging.ts:909</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="path" class="tsd-anchor"></a>
+					<h3>path</h3>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L908">Core/TagsManaging.ts:908</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tagresult" class="tsd-anchor"></a>
+					<h3>tag<wbr>Result</h3>
+					<div class="tsd-signature tsd-kind-icon">tag<wbr>Result<span class="tsd-signature-symbol">:</span> <a href="tagsmanaging.tagresult.html" class="tsd-signature-type">TagResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L907">Core/TagsManaging.ts:907</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="current" class="tsd-anchor"></a>
-					<h3>current</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> current<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L228">Core/Easing.ts:228</a></li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L937">Core/TagsManaging.ts:937</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L941">Core/TagsManaging.ts:941</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -191,42 +234,36 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="start" class="tsd-anchor"></a>
-					<h3>start</h3>
+					<a name="_makeinventoryids" class="tsd-anchor"></a>
+					<h3>_make<wbr>Inventory<wbr>Ids</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/easing.tweenpromise.html" class="tsd-signature-type">TweenPromise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">_make<wbr>Inventory<wbr>Ids<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L232">Core/Easing.ts:232</a></li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L919">Core/TagsManaging.ts:919</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/easing.tweenpromise.html" class="tsd-signature-type">TweenPromise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="stop" class="tsd-anchor"></a>
-					<h3>stop</h3>
+					<a name="isupdated" class="tsd-anchor"></a>
+					<h3>is<wbr>Updated</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">stop<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Updated<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/Easing.ts#L246">Core/Easing.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/LecodeMV/LeUtils/blob/2dc2433/src/Core/TagsManaging.ts#L928">Core/TagsManaging.ts:928</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -301,10 +338,10 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/core.html">Core</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/easing.html">Easing</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/tagsmanaging.html">Tags<wbr>Managing</a>
 					</li>
 				</ul>
@@ -314,53 +351,59 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="easing.tweensheet.html" class="tsd-kind-icon">Tween<wbr>Sheet</a>
+						<a href="tagsmanaging.cachedtagresult.html" class="tsd-kind-icon">Cached<wbr>Tag<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="tagsmanaging.cachedtagresult.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#_current" class="tsd-kind-icon">_current</a>
+								<a href="tagsmanaging.cachedtagresult.html#_value" class="tsd-kind-icon">_value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#_sheet" class="tsd-kind-icon">_sheet</a>
+								<a href="tagsmanaging.cachedtagresult.html#inventoryids" class="tsd-kind-icon">inventory<wbr>Ids</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#_tween" class="tsd-kind-icon">_tween</a>
+								<a href="tagsmanaging.cachedtagresult.html#operation" class="tsd-kind-icon">operation</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#current" class="tsd-kind-icon">current</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="tagsmanaging.cachedtagresult.html#path" class="tsd-kind-icon">path</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="tagsmanaging.cachedtagresult.html#tagresult" class="tsd-kind-icon">tag<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="tagsmanaging.cachedtagresult.html#value" class="tsd-kind-icon">value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#start" class="tsd-kind-icon">start</a>
+								<a href="tagsmanaging.cachedtagresult.html#_makeinventoryids" class="tsd-kind-icon">_make<wbr>Inventory<wbr>Ids</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="easing.tweensheet.html#stop" class="tsd-kind-icon">stop</a>
+								<a href="tagsmanaging.cachedtagresult.html#isupdated" class="tsd-kind-icon">is<wbr>Updated</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/easing.sheetobject.html" class="tsd-kind-icon">Sheet<wbr>Object</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="tagsmanaging.tagobservable.html" class="tsd-kind-icon">Tag<wbr>Observable</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/easing.tween.html" class="tsd-kind-icon">Tween</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="tagsmanaging.tagresult.html" class="tsd-kind-icon">Tag<wbr>Result</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../interfaces/easing.tweenpromise.html" class="tsd-kind-icon">Tween<wbr>Promise</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="tagsmanaging.tagsbulkobservable.html" class="tsd-kind-icon">Tags<wbr>Bulk<wbr>Observable</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/easing.html#easingname" class="tsd-kind-icon">Easing<wbr>Name</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/tagsmanaging.html#lesserwatcher" class="tsd-kind-icon">Lesser<wbr>Watcher</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/easing.html#tweensheetholder" class="tsd-kind-icon">Tween<wbr>Sheet<wbr>Holder</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/tagsmanaging.html#watchable" class="tsd-kind-icon">Watchable</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/easing.html#tween-1" class="tsd-kind-icon">tween</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/tagsmanaging.html#watcher" class="tsd-kind-icon">Watcher</a>
 					</li>
-					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
-						<a href="../modules/easing.html#easing-1" class="tsd-kind-icon">Easing</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/tagsmanaging.html#tags" class="tsd-kind-icon">tags</a>
 					</li>
 				</ul>
 			</nav>

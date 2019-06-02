@@ -2,6 +2,7 @@ import typescript from 'rollup-plugin-typescript2';
 import license from 'rollup-plugin-license';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import json from 'rollup-plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import mvConfig from './config/mv.config';
 import { pluginConfig } from './config/plugin.config';
@@ -26,6 +27,7 @@ const external = [
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {})
 ];
+console.log('external :', external);
 const globals = {};
 for (const ext of external) {
   globals[ext] = 'window';
@@ -49,6 +51,7 @@ function makeInitialConfig() {
         }
       ],
       plugins: [
+        json(),
         resolve(),
         commonjs(),
         typescript({
@@ -76,6 +79,7 @@ function makeMinConfig() {
           }
         ],
         plugins: [
+          json(),
           resolve(),
           commonjs(),
           typescript({
