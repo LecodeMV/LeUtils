@@ -52,6 +52,10 @@ let anyObservable = tag.observeAny([observable], (tag) => {
 });
 anyObservable.dispose();
 
+tag.observeAnyFrom('my_tag', tag => {
+
+});
+
 (async () => {
 
     let nbr = await getter.my_tag().nbr({ context: { a: 0} });

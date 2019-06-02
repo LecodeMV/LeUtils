@@ -38,16 +38,16 @@
  * When parsing and interpreting the values of these notetags, this module follow the following rules:
  * * Base values are overwritten according to this priority list: State > Equipment > Class > Battler.
  * * `+` suffix to a notetag is used to add raw values and `%` to modify the final value by a percentage.
- * 
+ *
  * ### Supporting TypeScript
- * 
+ *
  * The first thing to do before exploiting this module, is to define a Urd Model for your
  * notetags.
- * 
+ *
  * **myModel.urd-model.ts**
  * ```js
  * import { Model } from '@urd/core';
- * 
+ *
  * export const myModel: Model = {
  *  title: {
  *    type: 'string'
@@ -73,19 +73,19 @@
  *    }
  *  }
  * };
- * 
+ *
  * export default myModel;
  * ```
- * 
+ *
  * This model allows LeUtils to leverage TypeScript and provide top
  * class type definitions when using this module.
- * 
+ *
  * The next step is to generate the type definition from this model using Urd CLI:
  * ```bash
  * urd g i
  * ```
  * This will create a `myModel.urd-item.ts` in the same folder as `myModel.urd-model.ts`
- * 
+ *
  * Now that we have the notetags data and the model that reflect their structure,
  * we can use this module to extract any tag and value we want.
  *
@@ -94,12 +94,12 @@
  * import myModel from './tags/test.urd-model';
  * import { tags } from 'leutils';
  * import { MyModelItem, MyModelItemProps } from './tags/test.urd-item';
- * 
+ *
  * let tag = tags<MyModelItem, MyModelItemProps>(actor, myModel);
  * ```
- * 
+ *
  * Up to this point, there are two ways to exploit the `tag` object.
- * 
+ *
  * #### Chaining
  * ```ts
  * let getter = tag.getter();
@@ -111,10 +111,10 @@
  * let storageSize = await myTag.storage_size(); // (50 + 20) * 1.3 = 91
  * let passive = await myTag.passive(); // Power I, Self-Healing II, Counter III
  * let bio = await myTag.bio(); // I am a simple adventurer.
- * 
+ *
  * let goldGainPerStep2 = await getter.my_tag().gold_gain_per_step(); // This works too
  * ```
- * 
+ *
  * #### Magic String version
  * Note that auto-completion is provided for these strings.
  * ```ts
@@ -126,7 +126,7 @@
  * let passive = await tag.get('my_tag.passive'); // Power I, Self-Healing II, Counter III
  * let bio = await tag.get('my_tag.bio'); // I am a simple adventurer.
  * ```
- * 
+ *
  *
  * Note how all the getters used are asynchronous. That is because any value
  * of a notetag can be evaluated as a script, and be given a context:
@@ -140,14 +140,14 @@
  * <!storage_size>
  * return 50 + context.a;
  * </storage_size>
- * 
+ *
  * <!pet_name>
  * return context.title + ' Botan';
  * </pet_name>
  * </my_tag>
  * ```
  * These values can be obtained as such:
- * 
+ *
  * #### First Version
  * ```ts
  * let getter = tag.getter();
@@ -158,7 +158,7 @@
  * let storageSize = await myTag.storage_size({ a: 100 }); // 150
  * let petName = await myTag.pet_name({ title: 'Corrupted'}); // Corrupted Botan
  * ```
- * 
+ *
  * #### Second Version
  * ```ts
  * let myTag = await tag.get('my_tag'); // No context passed here
@@ -167,14 +167,14 @@
  *
  * let storageSize = await tag.get('my_tag.storage_size', {}, { a: 100 }); // 150
  * // The first parameter after the property string is the context for evaluating 'my_tag'
- * 
+ *
  * let petName = await tag.get('my_tag.pet_name', {}, { title: 'Corrupted'}); // Corrupted Botan
  * ```
- * 
+ *
  * ### Collecting values
- * Additionally, this module let you collect all the defined values of a tag within the battler's notetags 
+ * Additionally, this module let you collect all the defined values of a tag within the battler's notetags
  * and his states and gear.
- * 
+ *
  * Let's say we have the following notetags:
  * *Actor*
  * ```
@@ -182,7 +182,7 @@
  * gold_gain_per_step: 10
  * gold_gain_per_step%: 200
  * </my_tag>
- * 
+ *
  * title: Hero
  * ```
  *
@@ -192,7 +192,7 @@
  * gold_gain_per_step: 15
  * gold_gain_per_step+: 100
  * </my_tag>
- * 
+ *
  * title: Shadow
  * ```
  * These notetags can be collected this way:
@@ -200,7 +200,7 @@
  * let allGoldGainPerSteps = await tag.collect('my_tag.gold_gain_per_step'); // [10, 15]
  * let allGoldGainPerStepPlusValues = await tag.collect('my_tag.gold_gain_per_step+'); // [100]
  * let allGoldGainPerStepRates = await tag.collect('my_tag.gold_gain_per_step%'); // [200]
- * 
+ *
  * // Alternative version:
  * let collector = tag.collector();
  * let allTitles = await collector.title(); // ['Hero', 'Shadow']
@@ -214,7 +214,7 @@
  *
  * ```ts
  * let tag = tags(actor);
- * 
+ *
  * // Observe a single value
  * let observable = tag.observable('my_tag.gold_gain_per_step', 0); // Default value is 0
  * // You have to register a function that return a context for each property
@@ -230,35 +230,43 @@
  * // Don't forget to dispose of the observable when it is no more needed
  * observable.dispose();
  * ```
- * 
+ *
  * #### Watching any or all chances
  * It's possible to react to any or all changes within a set of notetags.
  * ```ts
  * let goldGainObservable = tag.observable('my_tag.gold_gain_per_step', 0);
  * // initialize the observable...
- * 
+ *
  * let titleObservable = tag.observable('title', 0);
  * // initialize the observable...
- * 
+ *
  * // Watch any change
  * let anyObservable = tag.observeAny([goldGainObservable, titleObservable], (tag) => {
  *  // either the value of 'gold_gain_per_step' or 'title' changed
  * });
- * 
+ *
  * // Watch any change
  * let allObservable = tag.observeAll([goldGainObservable, titleObservable], (tag) => {
  *  // all values changed since the last iteration
  * });
- * 
+ *
  * // These observables can be disposed as well
  * anyObservable.dispose();
  * allObservable.dispose();
- * 
+ *
  * // Bulk observables can even be used within another observable:
  * let observableCeption = tag.observeAll([anyObservable1, anyObservable2], (tag) => {
- *  
+ *
  * });
  * 
+ * // Bulk observables can also be applied to a tag which is a structure:
+ * let obs1 = tag.observeAnyFrom('my_tag', tag => {
+ * 
+ * });
+ * let obs2 = tag.observeAllFrom('my_tag', tag => {
+ * 
+ * });
+ *
  * ```
  *
  * @module TagsManaging
@@ -456,13 +464,14 @@ export class TagResult<T, TProp = any> {
   _adaptModel(obj: Model = this.model) {
     if (obj[Adapted]) return;
     for (const [key, value] of Object.entries(obj)) {
-      if (value.type === 'number' || value.type === 'map') {
+      let _value = typeof value === 'string' ? { type: value } : value;
+      if (_value.type === 'number' || _value.type === 'map') {
+        obj[key + 'Plus'] = _value;
+        obj[key + 'Rate'] = _value;
+      } else if (['string', 'list', 'text'].includes(_value.type)) {
         obj[key + 'Plus'] = value;
-        obj[key + 'Rate'] = value;
-      } else if (['string', 'list', 'text'].includes(value.type)) {
-        obj[key + 'Plus'] = value;
-      } else if (value.type === 'structure') {
-        this._adaptModel(value.fields);
+      } else if (_value.type === 'structure') {
+        this._adaptModel(_value.fields);
       }
     }
     //@ts-ignore
@@ -703,6 +712,7 @@ export class TagResult<T, TProp = any> {
     obs.children = obsArr;
     obs.strategy = 'any';
     obs.onChange(watcher as any);
+    obsArr.forEach(obs => this.removeObservable(obs as any));
     //@ts-ignore
     return (this.observables[String(id)] = obs);
   }
@@ -713,17 +723,42 @@ export class TagResult<T, TProp = any> {
     obs.children = obsArr;
     obs.strategy = 'all';
     obs.onChange(watcher as any);
+    obsArr.forEach(obs => this.removeObservable(obs as any));
     //@ts-ignore
     return (this.observables[String(id)] = obs);
   }
 
+  observeAnyFrom<I extends TProp, K extends keyof TProp>(prop: K, watcher: LesserWatcher<T>) {
+    let patterns = Urd.makePatterns(this.model);
+    let props = patterns
+      .map(p => {
+        let path = p.path.replace('__root__', '');
+        return path.startsWith((prop as string) + '.') ? path : null;
+      })
+      .filter(v => !!v);
+    let obsChildren = props.map(p => this.observable(p as any));
+    return this.observeAny(obsChildren, watcher);
+  }
+
+  observeAllFrom<I extends TProp, K extends keyof TProp>(prop: K, watcher: LesserWatcher<T>) {
+    let patterns = Urd.makePatterns(this.model);
+    let props = patterns
+      .map(p => {
+        let path = p.path.replace('__root__', '');
+        return path.startsWith((prop as string) + '.') ? path : null;
+      })
+      .filter(v => !!v);
+    let obsChildren = props.map(p => this.observable(p as any));
+    return this.observeAll(obsChildren, watcher);
+  }
+
   removeObservable(obs: TagObservable<T, TProp>) {
-    delete this.observables[String(obs.id)];
+    this.observables[String(obs.id)] = null;
   }
 
   checkObservables() {
     for (const obs of Object.values(this.observables)) {
-      obs.check();
+      if (obs) obs.check();
     }
   }
 
@@ -875,7 +910,7 @@ export class TagResult<T, TProp = any> {
   _makeStructureDefaultValue(pattern: ModelPattern) {
     let obj = {};
     for (const [key, value] of Object.entries(pattern.fields)) {
-      obj[key] = this._getDefaultValue(value);
+      obj[key] = this._getDefaultValue(typeof value === 'string' ? { type: value } : value);
     }
     return obj;
   }
